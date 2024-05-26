@@ -1,3 +1,4 @@
+{-# LANGUAGE MagicHash #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE FunctionalDependencies #-}
@@ -55,6 +56,7 @@ module Language.LSP.VFS (
 ) where
 
 import Colog.Core (LogAction (..), Severity (..), WithSeverity (..), (<&))
+import Data.Kind
 import Control.Lens hiding (parts, (<.>))
 import Control.Monad
 import Control.Monad.State
@@ -121,8 +123,34 @@ instance Pretty VfsLog where
     "VFS: can't recursively delete" <+> pretty uri <+> "because we don't track directory status"
   pretty (DeleteNonExistent uri) = "VFS: asked to delete non-existent file" <+> pretty uri
 
-makeFieldsNoPrefix ''VirtualFile
-makeFieldsNoPrefix ''VFS
+class HasFile_text s a | s -> a where
+  file_text :: Lens' s a
+instance HasFile_text VirtualFile Rope where
+  {-# INLINE file_text #-}
+  file_text f_aqsB (VirtualFile x1_aqsC x2_aqsD x3_aqsE)
+    = (fmap (\ y1_aqsF -> ((VirtualFile x1_aqsC) x2_aqsD) y1_aqsF))
+        (f_aqsB x3_aqsE)
+class HasFile_version s a | s -> a where
+  file_version :: Lens' s a
+instance HasFile_version VirtualFile Int where
+  {-# INLINE file_version #-}
+  file_version f_aqsG (VirtualFile x1_aqsH x2_aqsI x3_aqsJ)
+    = (fmap (\ y1_aqsK -> ((VirtualFile x1_aqsH) y1_aqsK) x3_aqsJ))
+        (f_aqsG x2_aqsI)
+class HasLsp_version s a | s -> a where
+  lsp_version :: Lens' s a
+instance HasLsp_version VirtualFile Int32 where
+  {-# INLINE lsp_version #-}
+  lsp_version f_aqsL (VirtualFile x1_aqsM x2_aqsN x3_aqsO)
+    = (fmap (\ y1_aqsP -> ((VirtualFile y1_aqsP) x2_aqsN) x3_aqsO))
+        (f_aqsL x1_aqsM)
+
+class HasVfsMap s a | s -> a where
+  vfsMap :: Lens' s a
+instance HasVfsMap VFS (Map.Map J.NormalizedUri VirtualFile) where
+  {-# INLINE vfsMap #-}
+  vfsMap = (iso (\ (VFS x_aqCe) -> x_aqCe)) VFS
+
 
 ---
 
@@ -378,8 +406,36 @@ data CodePointRange = CodePointRange
   }
   deriving (Show, Read, Eq, Ord)
 
-makeFieldsNoPrefix ''CodePointPosition
-makeFieldsNoPrefix ''CodePointRange
+class HasCharacter s a | s -> a where
+  character :: Lens' s a
+instance HasCharacter CodePointPosition J.UInt where
+  {-# INLINE character #-}
+  character f_au0d (CodePointPosition x1_au0e x2_au0f)
+    = (fmap (\ y1_au0g -> (CodePointPosition x1_au0e) y1_au0g))
+        (f_au0d x2_au0f)
+class HasLine s a | s -> a where
+  line :: Lens' s a
+instance HasLine CodePointPosition J.UInt where
+  {-# INLINE line #-}
+  line f_au0h (CodePointPosition x1_au0i x2_au0j)
+    = (fmap (\ y1_au0k -> (CodePointPosition y1_au0k) x2_au0j))
+        (f_au0h x1_au0i)
+
+class HasEnd s a | s -> a where
+  end :: Lens' s a
+instance HasEnd CodePointRange CodePointPosition where
+  {-# INLINE end #-}
+  end f_au29 (CodePointRange x1_au2a x2_au2b)
+    = (fmap (\ y1_au2c -> (CodePointRange x1_au2a) y1_au2c))
+        (f_au29 x2_au2b)
+class HasStart s a | s -> a where
+  start :: Lens' s a
+instance HasStart CodePointRange CodePointPosition where
+  {-# INLINE start #-}
+  start f_au2d (CodePointRange x1_au2e x2_au2f)
+    = (fmap (\ y1_au2g -> (CodePointRange y1_au2g) x2_au2f))
+        (f_au2d x1_au2e)
+
 
 {- Note [Converting between code points and code units]
 This is inherently a somewhat expensive operation, but we take some care to minimize the cost.

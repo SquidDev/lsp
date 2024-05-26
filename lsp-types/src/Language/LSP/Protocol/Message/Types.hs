@@ -1,9 +1,14 @@
+{-# LANGUAGE MagicHash #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE TemplateHaskell #-}
 
 module Language.LSP.Protocol.Message.Types where
 
 import Language.LSP.Protocol.Internal.Method
+import qualified Data.Aeson.Encoding.Internal
+import qualified Language.LSP.Protocol.AesonUnsafe
+import qualified Data.Aeson.Key
+import Data.Kind
 import Language.LSP.Protocol.Message.LspId
 import Language.LSP.Protocol.Message.Meta
 import Language.LSP.Protocol.Message.Method ()
@@ -32,7 +37,88 @@ data NotificationMessage = NotificationMessage
   }
   deriving stock (Show, Eq, Generic)
 
-deriveJSON lspOptions ''NotificationMessage
+instance ToJSON NotificationMessage where
+  toJSON
+    = let
+      in
+        \ value_aGvze
+          -> case value_aGvze of
+               NotificationMessage arg1_aGvzh arg2_aGvzi arg3_aGvzj
+                 -> Language.LSP.Protocol.AesonUnsafe.fromPairs
+                      (((maybe mempty)
+                          (\ x_aGvzk
+                             -> (Language.LSP.Protocol.AesonUnsafe.pair
+                                   (Data.Aeson.Key.fromString "params"))
+                                  (toJSON x_aGvzk)))
+                         arg3_aGvzj
+                         <>
+                           ((Language.LSP.Protocol.AesonUnsafe.pair
+                               (Data.Aeson.Key.fromString "jsonrpc"))
+                              (toJSON arg1_aGvzh)
+                              <>
+                                (Language.LSP.Protocol.AesonUnsafe.pair
+                                   (Data.Aeson.Key.fromString "method"))
+                                  (toJSON arg2_aGvzi)))
+  toEncoding
+    = let
+        _let1_aGvzx
+          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+               10)
+              "\"jsonrpc\":"#
+        _let2_aGvzy
+          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+               9)
+              "\"method\":"#
+        _let0_aGvzu
+          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+               9)
+              "\"params\":"#
+      in
+        \ value_aGvzn
+          -> case value_aGvzn of
+               NotificationMessage arg1_aGvzq arg2_aGvzr arg3_aGvzs
+                 -> Language.LSP.Protocol.AesonUnsafe.fromPairs
+                      (((maybe mempty)
+                          (\ x_aGvzt
+                             -> (Data.Aeson.Encoding.Internal.unsafePairSBS _let0_aGvzu)
+                                  (toEncoding x_aGvzt)))
+                         arg3_aGvzs
+                         <>
+                           ((Data.Aeson.Encoding.Internal.unsafePairSBS _let1_aGvzx)
+                              (toEncoding arg1_aGvzq)
+                              <>
+                                (Data.Aeson.Encoding.Internal.unsafePairSBS _let2_aGvzy)
+                                  (toEncoding arg2_aGvzr)))
+instance FromJSON NotificationMessage where
+  parseJSON
+    = \ value_aGvzz
+        -> case value_aGvzz of
+             Object recObj_aGvzA
+               -> (((NotificationMessage
+                       <$>
+                         ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
+                              "Language.LSP.Protocol.Message.Types.NotificationMessage")
+                             "NotificationMessage")
+                            recObj_aGvzA)
+                           (Data.Aeson.Key.fromString "jsonrpc"))
+                      <*>
+                        ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
+                             "Language.LSP.Protocol.Message.Types.NotificationMessage")
+                            "NotificationMessage")
+                           recObj_aGvzA)
+                          (Data.Aeson.Key.fromString "method"))
+                     <*>
+                       ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
+                            "Language.LSP.Protocol.Message.Types.NotificationMessage")
+                           "NotificationMessage")
+                          recObj_aGvzA)
+                         (Data.Aeson.Key.fromString "params"))
+             other_aGvzF
+               -> (((Language.LSP.Protocol.AesonUnsafe.parseTypeMismatch' "NotificationMessage")
+                      "Language.LSP.Protocol.Message.Types.NotificationMessage")
+                     "Object")
+                    (Language.LSP.Protocol.AesonUnsafe.valueConName other_aGvzF)
+
 deriving via ViaJSON NotificationMessage instance Pretty NotificationMessage
 
 -- This isn't present in the metamodel.
@@ -46,7 +132,105 @@ data RequestMessage = RequestMessage
   }
   deriving stock (Show, Eq, Generic)
 
-deriveJSON lspOptions ''RequestMessage
+instance ToJSON RequestMessage where
+  toJSON
+    = let
+      in
+        \ value_aGvLi
+          -> case value_aGvLi of
+               RequestMessage arg1_aGvLp arg2_aGvLq arg3_aGvLr arg4_aGvLs
+                 -> Language.LSP.Protocol.AesonUnsafe.fromPairs
+                      (((maybe mempty)
+                          (\ x_aGvLt
+                             -> (Language.LSP.Protocol.AesonUnsafe.pair
+                                   (Data.Aeson.Key.fromString "params"))
+                                  (toJSON x_aGvLt)))
+                         arg4_aGvLs
+                         <>
+                           ((Language.LSP.Protocol.AesonUnsafe.pair
+                               (Data.Aeson.Key.fromString "jsonrpc"))
+                              (toJSON arg1_aGvLp)
+                              <>
+                                ((Language.LSP.Protocol.AesonUnsafe.pair
+                                    (Data.Aeson.Key.fromString "id"))
+                                   (toJSON arg2_aGvLq)
+                                   <>
+                                     (Language.LSP.Protocol.AesonUnsafe.pair
+                                        (Data.Aeson.Key.fromString "method"))
+                                       (toJSON arg3_aGvLr))))
+  toEncoding
+    = let
+        _let2_aGvLQ
+          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+               5)
+              "\"id\":"#
+        _let1_aGvLP
+          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+               10)
+              "\"jsonrpc\":"#
+        _let3_aGvLV
+          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+               9)
+              "\"method\":"#
+        _let0_aGvLM
+          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+               9)
+              "\"params\":"#
+      in
+        \ value_aGvLA
+          -> case value_aGvLA of
+               RequestMessage arg1_aGvLH arg2_aGvLI arg3_aGvLJ arg4_aGvLK
+                 -> Language.LSP.Protocol.AesonUnsafe.fromPairs
+                      (((maybe mempty)
+                          (\ x_aGvLL
+                             -> (Data.Aeson.Encoding.Internal.unsafePairSBS _let0_aGvLM)
+                                  (toEncoding x_aGvLL)))
+                         arg4_aGvLK
+                         <>
+                           ((Data.Aeson.Encoding.Internal.unsafePairSBS _let1_aGvLP)
+                              (toEncoding arg1_aGvLH)
+                              <>
+                                ((Data.Aeson.Encoding.Internal.unsafePairSBS _let2_aGvLQ)
+                                   (toEncoding arg2_aGvLI)
+                                   <>
+                                     (Data.Aeson.Encoding.Internal.unsafePairSBS _let3_aGvLV)
+                                       (toEncoding arg3_aGvLJ))))
+instance FromJSON RequestMessage where
+  parseJSON
+    = \ value_aGvLW
+        -> case value_aGvLW of
+             Object recObj_aGvLX
+               -> ((((RequestMessage
+                        <$>
+                          ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
+                               "Language.LSP.Protocol.Message.Types.RequestMessage")
+                              "RequestMessage")
+                             recObj_aGvLX)
+                            (Data.Aeson.Key.fromString "jsonrpc"))
+                       <*>
+                         ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
+                              "Language.LSP.Protocol.Message.Types.RequestMessage")
+                             "RequestMessage")
+                            recObj_aGvLX)
+                           (Data.Aeson.Key.fromString "id"))
+                      <*>
+                        ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
+                             "Language.LSP.Protocol.Message.Types.RequestMessage")
+                            "RequestMessage")
+                           recObj_aGvLX)
+                          (Data.Aeson.Key.fromString "method"))
+                     <*>
+                       ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
+                            "Language.LSP.Protocol.Message.Types.RequestMessage")
+                           "RequestMessage")
+                          recObj_aGvLX)
+                         (Data.Aeson.Key.fromString "params"))
+             other_aGvMa
+               -> (((Language.LSP.Protocol.AesonUnsafe.parseTypeMismatch' "RequestMessage")
+                      "Language.LSP.Protocol.Message.Types.RequestMessage")
+                     "Object")
+                    (Language.LSP.Protocol.AesonUnsafe.valueConName other_aGvMa)
+
 deriving via ViaJSON RequestMessage instance Pretty RequestMessage
 
 -- | Response error type as defined in the spec.
@@ -72,7 +256,59 @@ It's hard to find any other good way of representing things properly with what
 we've got, so in the end we decided to patch up the JSON parsing with a custom
 instance.
 -}
-deriveToJSON lspOptions ''ResponseError
+instance ToJSON ResponseError where
+  toJSON
+    = let
+      in
+        \ value_aGvWC
+          -> case value_aGvWC of
+               ResponseError arg1_aGvWJ arg2_aGvWK arg3_aGvWL
+                 -> Language.LSP.Protocol.AesonUnsafe.fromPairs
+                      (((maybe mempty)
+                          (\ x_aGvWM
+                             -> (Language.LSP.Protocol.AesonUnsafe.pair
+                                   (Data.Aeson.Key.fromString "data"))
+                                  (toJSON x_aGvWM)))
+                         arg3_aGvWL
+                         <>
+                           ((Language.LSP.Protocol.AesonUnsafe.pair
+                               (Data.Aeson.Key.fromString "code"))
+                              (toJSON arg1_aGvWJ)
+                              <>
+                                (Language.LSP.Protocol.AesonUnsafe.pair
+                                   (Data.Aeson.Key.fromString "message"))
+                                  (toJSON arg2_aGvWK)))
+  toEncoding
+    = let
+        _let1_aGvX7
+          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+               7)
+              "\"code\":"#
+        _let0_aGvX4
+          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+               7)
+              "\"data\":"#
+        _let2_aGvXc
+          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+               10)
+              "\"message\":"#
+      in
+        \ value_aGvWT
+          -> case value_aGvWT of
+               ResponseError arg1_aGvX0 arg2_aGvX1 arg3_aGvX2
+                 -> Language.LSP.Protocol.AesonUnsafe.fromPairs
+                      (((maybe mempty)
+                          (\ x_aGvX3
+                             -> (Data.Aeson.Encoding.Internal.unsafePairSBS _let0_aGvX4)
+                                  (toEncoding x_aGvX3)))
+                         arg3_aGvX2
+                         <>
+                           ((Data.Aeson.Encoding.Internal.unsafePairSBS _let1_aGvX7)
+                              (toEncoding arg1_aGvX0)
+                              <>
+                                (Data.Aeson.Encoding.Internal.unsafePairSBS _let2_aGvXc)
+                                  (toEncoding arg2_aGvX1)))
+
 instance FromJSON ResponseError where
   parseJSON =
     let errorCode = withObject "ResponseError" $ \v ->
@@ -98,7 +334,111 @@ data ResponseMessage = ResponseMessage
   }
   deriving stock (Show, Eq, Generic)
 
-deriveJSON lspOptions ''ResponseMessage
+instance ToJSON ResponseMessage where
+  toJSON
+    = let
+      in
+        \ value_aGw9h
+          -> case value_aGw9h of
+               ResponseMessage arg1_aGw9u arg2_aGw9v arg3_aGw9w arg4_aGw9x
+                 -> Language.LSP.Protocol.AesonUnsafe.fromPairs
+                      ((((maybe mempty)
+                           (\ x_aGw9y
+                              -> (Language.LSP.Protocol.AesonUnsafe.pair
+                                    (Data.Aeson.Key.fromString "result"))
+                                   (toJSON x_aGw9y)))
+                          arg3_aGw9w
+                          <>
+                            ((maybe mempty)
+                               (\ x_aGw9B
+                                  -> (Language.LSP.Protocol.AesonUnsafe.pair
+                                        (Data.Aeson.Key.fromString "error"))
+                                       (toJSON x_aGw9B)))
+                              arg4_aGw9x)
+                         <>
+                           ((Language.LSP.Protocol.AesonUnsafe.pair
+                               (Data.Aeson.Key.fromString "jsonrpc"))
+                              (toJSON arg1_aGw9u)
+                              <>
+                                (Language.LSP.Protocol.AesonUnsafe.pair
+                                   (Data.Aeson.Key.fromString "id"))
+                                  (toJSON arg2_aGw9v)))
+  toEncoding
+    = let
+        _let1_aGwa4
+          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+               8)
+              "\"error\":"#
+        _let3_aGwa8
+          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+               5)
+              "\"id\":"#
+        _let2_aGwa7
+          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+               10)
+              "\"jsonrpc\":"#
+        _let0_aGwa0
+          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+               9)
+              "\"result\":"#
+      in
+        \ value_aGw9I
+          -> case value_aGw9I of
+               ResponseMessage arg1_aGw9V arg2_aGw9W arg3_aGw9X arg4_aGw9Y
+                 -> Language.LSP.Protocol.AesonUnsafe.fromPairs
+                      ((((maybe mempty)
+                           (\ x_aGw9Z
+                              -> (Data.Aeson.Encoding.Internal.unsafePairSBS _let0_aGwa0)
+                                   (toEncoding x_aGw9Z)))
+                          arg3_aGw9X
+                          <>
+                            ((maybe mempty)
+                               (\ x_aGwa3
+                                  -> (Data.Aeson.Encoding.Internal.unsafePairSBS _let1_aGwa4)
+                                       (toEncoding x_aGwa3)))
+                              arg4_aGw9Y)
+                         <>
+                           ((Data.Aeson.Encoding.Internal.unsafePairSBS _let2_aGwa7)
+                              (toEncoding arg1_aGw9V)
+                              <>
+                                (Data.Aeson.Encoding.Internal.unsafePairSBS _let3_aGwa8)
+                                  (toEncoding arg2_aGw9W)))
+instance FromJSON ResponseMessage where
+  parseJSON
+    = \ value_aGwad
+        -> case value_aGwad of
+             Object recObj_aGwae
+               -> ((((ResponseMessage
+                        <$>
+                          ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
+                               "Language.LSP.Protocol.Message.Types.ResponseMessage")
+                              "ResponseMessage")
+                             recObj_aGwae)
+                            (Data.Aeson.Key.fromString "jsonrpc"))
+                       <*>
+                         ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
+                              "Language.LSP.Protocol.Message.Types.ResponseMessage")
+                             "ResponseMessage")
+                            recObj_aGwae)
+                           (Data.Aeson.Key.fromString "id"))
+                      <*>
+                        ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
+                             "Language.LSP.Protocol.Message.Types.ResponseMessage")
+                            "ResponseMessage")
+                           recObj_aGwae)
+                          (Data.Aeson.Key.fromString "result"))
+                     <*>
+                       ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
+                            "Language.LSP.Protocol.Message.Types.ResponseMessage")
+                           "ResponseMessage")
+                          recObj_aGwae)
+                         (Data.Aeson.Key.fromString "error"))
+             other_aGwaz
+               -> (((Language.LSP.Protocol.AesonUnsafe.parseTypeMismatch' "ResponseMessage")
+                      "Language.LSP.Protocol.Message.Types.ResponseMessage")
+                     "Object")
+                    (Language.LSP.Protocol.AesonUnsafe.valueConName other_aGwaz)
+
 
 deriving via ViaJSON ResponseMessage instance Pretty ResponseMessage
 

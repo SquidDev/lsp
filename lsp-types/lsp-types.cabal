@@ -83,6 +83,7 @@ library
     , some                           ^>=1.0
     , template-haskell               >=2.7   && <2.23
     , text                           >=1     && <2.2
+    , bytestring
 
   -- This version of filepath comes with GHC 9.6, so
   -- we should be able to drop this flag once we only
@@ -111,6 +112,7 @@ library
     Language.LSP.Protocol.Meta
     Language.LSP.Protocol.Utils.Misc
     Language.LSP.Protocol.Utils.SMethodMap
+    Language.LSP.Protocol.AesonUnsafe
 
   other-modules:
     Language.LSP.Protocol.Message.Lens

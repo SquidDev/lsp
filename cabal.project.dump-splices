@@ -1,0 +1,7 @@
+packages: ./lsp ./lsp-types/
+
+package lsp-types
+  ghc-options: -ddump-to-file -ddump-file-prefix=ghc.dump -ddump-splices
+
+package lsp
+  ghc-options: -ddump-to-file -ddump-file-prefix=ghc.dump -ddump-splices
