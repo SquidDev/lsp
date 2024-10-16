@@ -127,29 +127,29 @@ class HasFile_text s a | s -> a where
   file_text :: Lens' s a
 instance HasFile_text VirtualFile Rope where
   {-# INLINE file_text #-}
-  file_text f_aqsB (VirtualFile x1_aqsC x2_aqsD x3_aqsE)
-    = (fmap (\ y1_aqsF -> ((VirtualFile x1_aqsC) x2_aqsD) y1_aqsF))
-        (f_aqsB x3_aqsE)
+  file_text f_aqEw (VirtualFile x1_aqEx x2_aqEy x3_aqEz)
+    = fmap
+        (\ y1_aqEA -> VirtualFile x1_aqEx x2_aqEy y1_aqEA) (f_aqEw x3_aqEz)
 class HasFile_version s a | s -> a where
   file_version :: Lens' s a
 instance HasFile_version VirtualFile Int where
   {-# INLINE file_version #-}
-  file_version f_aqsG (VirtualFile x1_aqsH x2_aqsI x3_aqsJ)
-    = (fmap (\ y1_aqsK -> ((VirtualFile x1_aqsH) y1_aqsK) x3_aqsJ))
-        (f_aqsG x2_aqsI)
+  file_version f_aqEB (VirtualFile x1_aqEC x2_aqED x3_aqEE)
+    = fmap
+        (\ y1_aqEF -> VirtualFile x1_aqEC y1_aqEF x3_aqEE) (f_aqEB x2_aqED)
 class HasLsp_version s a | s -> a where
   lsp_version :: Lens' s a
 instance HasLsp_version VirtualFile Int32 where
   {-# INLINE lsp_version #-}
-  lsp_version f_aqsL (VirtualFile x1_aqsM x2_aqsN x3_aqsO)
-    = (fmap (\ y1_aqsP -> ((VirtualFile y1_aqsP) x2_aqsN) x3_aqsO))
-        (f_aqsL x1_aqsM)
+  lsp_version f_aqEG (VirtualFile x1_aqEH x2_aqEI x3_aqEJ)
+    = fmap
+        (\ y1_aqEK -> VirtualFile y1_aqEK x2_aqEI x3_aqEJ) (f_aqEG x1_aqEH)
 
 class HasVfsMap s a | s -> a where
   vfsMap :: Lens' s a
 instance HasVfsMap VFS (Map.Map J.NormalizedUri VirtualFile) where
   {-# INLINE vfsMap #-}
-  vfsMap = (iso (\ (VFS x_aqCe) -> x_aqCe)) VFS
+  vfsMap = iso (\ (VFS x_aqIf) -> x_aqIf) VFS
 
 
 ---
@@ -410,31 +410,31 @@ class HasCharacter s a | s -> a where
   character :: Lens' s a
 instance HasCharacter CodePointPosition J.UInt where
   {-# INLINE character #-}
-  character f_au0d (CodePointPosition x1_au0e x2_au0f)
-    = (fmap (\ y1_au0g -> (CodePointPosition x1_au0e) y1_au0g))
-        (f_au0d x2_au0f)
+  character f_au9R (CodePointPosition x1_au9S x2_au9T)
+    = fmap
+        (\ y1_au9U -> CodePointPosition x1_au9S y1_au9U) (f_au9R x2_au9T)
 class HasLine s a | s -> a where
   line :: Lens' s a
 instance HasLine CodePointPosition J.UInt where
   {-# INLINE line #-}
-  line f_au0h (CodePointPosition x1_au0i x2_au0j)
-    = (fmap (\ y1_au0k -> (CodePointPosition y1_au0k) x2_au0j))
-        (f_au0h x1_au0i)
+  line f_au9V (CodePointPosition x1_au9W x2_au9X)
+    = fmap
+        (\ y1_au9Y -> CodePointPosition y1_au9Y x2_au9X) (f_au9V x1_au9W)
 
 class HasEnd s a | s -> a where
   end :: Lens' s a
 instance HasEnd CodePointRange CodePointPosition where
   {-# INLINE end #-}
-  end f_au29 (CodePointRange x1_au2a x2_au2b)
-    = (fmap (\ y1_au2c -> (CodePointRange x1_au2a) y1_au2c))
-        (f_au29 x2_au2b)
+  end f_auc5 (CodePointRange x1_auc6 x2_auc7)
+    = fmap
+        (\ y1_auc8 -> CodePointRange x1_auc6 y1_auc8) (f_auc5 x2_auc7)
 class HasStart s a | s -> a where
   start :: Lens' s a
 instance HasStart CodePointRange CodePointPosition where
   {-# INLINE start #-}
-  start f_au2d (CodePointRange x1_au2e x2_au2f)
-    = (fmap (\ y1_au2g -> (CodePointRange y1_au2g) x2_au2f))
-        (f_au2d x1_au2e)
+  start f_auc9 (CodePointRange x1_auca x2_aucb)
+    = fmap
+        (\ y1_aucc -> CodePointRange y1_aucc x2_aucb) (f_auc9 x1_auca)
 
 
 {- Note [Converting between code points and code units]

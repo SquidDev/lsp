@@ -78,7 +78,7 @@ def patch(input: str, src_dir: str):
 
                 imports.add(remapped_module)
 
-            body = body.replace("aeson-2.1.2.1-1YB20WAhI7FDBnxJnrTmE5:", "")
+            body = body.replace("aeson-2.2.3.0-27526f5d965f68d22ff18ed31153947b3d5e4d4dc87b54cc17833f8f0c7b4cbc:", "")
 
             lines[start_line - 1] = before + body + line[end_col:]
 
@@ -97,10 +97,10 @@ def patch(input: str, src_dir: str):
 
 if __name__ == '__main__':
     patch(
-        input = "./dist-newstyle/build/x86_64-linux/ghc-9.4.8/lsp-types-2.2.0.0/build/ghc.dump.dump-splices",
+        input = "./dist-newstyle/build/x86_64-linux/ghc-9.10.1/lsp-types-2.3.0.0/build/ghc.dump.dump-splices",
         src_dir = "lsp-types"
     )
     patch(
-        input = "./dist-newstyle/build/x86_64-linux/ghc-9.4.8/lsp-2.6.0.0/build/ghc.dump.dump-splices",
+        input = "./dist-newstyle/build/x86_64-linux/ghc-9.10.1/lsp-2.7.0.0/build/ghc.dump.dump-splices",
         src_dir = "lsp"
     )

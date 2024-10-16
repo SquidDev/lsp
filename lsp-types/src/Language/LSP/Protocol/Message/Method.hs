@@ -802,14 +802,14 @@ instance FromJSON (SMethod 'Method_LogTrace) where
            (\case
               SomeMethod SMethod_LogTrace -> pure SMethod_LogTrace
               _ -> mempty))
-instance FromJSON (SMethod ('Method_CancelRequest :: Method f_iEMBD 'Notification)) where
+instance FromJSON (SMethod ('Method_CancelRequest :: Method f_iQSWI 'Notification)) where
   parseJSON
     = (parseJSON
          Control.Monad.>=>
            (\case
               SomeMethod SMethod_CancelRequest -> pure SMethod_CancelRequest
               _ -> mempty))
-instance FromJSON (SMethod ('Method_Progress :: Method f_iEMBD 'Notification)) where
+instance FromJSON (SMethod ('Method_Progress :: Method f_iQSWI 'Notification)) where
   parseJSON
     = (parseJSON
          Control.Monad.>=>

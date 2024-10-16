@@ -5,9 +5,9 @@
 module Language.LSP.Protocol.Message.Types where
 
 import Language.LSP.Protocol.Internal.Method
+import qualified Data.Aeson.Key
 import qualified Data.Aeson.Encoding.Internal
 import qualified Language.LSP.Protocol.AesonUnsafe
-import qualified Data.Aeson.Key
 import Data.Kind
 import Language.LSP.Protocol.Message.LspId
 import Language.LSP.Protocol.Message.Meta
@@ -41,83 +41,90 @@ instance ToJSON NotificationMessage where
   toJSON
     = let
       in
-        \ value_aGvze
-          -> case value_aGvze of
-               NotificationMessage arg1_aGvzh arg2_aGvzi arg3_aGvzj
+        \ value_aSCQb
+          -> case value_aSCQb of
+               NotificationMessage arg1_aSCQe arg2_aSCQf arg3_aSCQg
                  -> Language.LSP.Protocol.AesonUnsafe.fromPairs
-                      (((maybe mempty)
-                          (\ x_aGvzk
-                             -> (Language.LSP.Protocol.AesonUnsafe.pair
-                                   (Data.Aeson.Key.fromString "params"))
-                                  (toJSON x_aGvzk)))
-                         arg3_aGvzj
+                      ((if omitField arg1_aSCQe then
+                            mempty
+                        else
+                            Language.LSP.Protocol.AesonUnsafe.pair
+                              (Data.Aeson.Key.fromString "jsonrpc") (toJSON arg1_aSCQe))
                          <>
-                           ((Language.LSP.Protocol.AesonUnsafe.pair
-                               (Data.Aeson.Key.fromString "jsonrpc"))
-                              (toJSON arg1_aGvzh)
+                           ((if omitField arg2_aSCQf then
+                                 mempty
+                             else
+                                 Language.LSP.Protocol.AesonUnsafe.pair
+                                   (Data.Aeson.Key.fromString "method") (toJSON arg2_aSCQf))
                               <>
-                                (Language.LSP.Protocol.AesonUnsafe.pair
-                                   (Data.Aeson.Key.fromString "method"))
-                                  (toJSON arg2_aGvzi)))
+                                (if omitField arg3_aSCQg then
+                                     mempty
+                                 else
+                                     Language.LSP.Protocol.AesonUnsafe.pair
+                                       (Data.Aeson.Key.fromString "params")
+                                       (toJSON arg3_aSCQg))))
   toEncoding
     = let
-        _let1_aGvzx
-          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
-               10)
-              "\"jsonrpc\":"#
-        _let2_aGvzy
-          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
-               9)
-              "\"method\":"#
-        _let0_aGvzu
-          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
-               9)
-              "\"params\":"#
+        _let0_aSCQr
+          = Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+              10 "\"jsonrpc\":"#
+        _let1_aSCQs
+          = Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+              9 "\"method\":"#
+        _let2_aSCQv
+          = Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+              9 "\"params\":"#
       in
-        \ value_aGvzn
-          -> case value_aGvzn of
-               NotificationMessage arg1_aGvzq arg2_aGvzr arg3_aGvzs
+        \ value_aSCQl
+          -> case value_aSCQl of
+               NotificationMessage arg1_aSCQo arg2_aSCQp arg3_aSCQq
                  -> Language.LSP.Protocol.AesonUnsafe.fromPairs
-                      (((maybe mempty)
-                          (\ x_aGvzt
-                             -> (Data.Aeson.Encoding.Internal.unsafePairSBS _let0_aGvzu)
-                                  (toEncoding x_aGvzt)))
-                         arg3_aGvzs
+                      ((if omitField arg1_aSCQo then
+                            mempty
+                        else
+                            Data.Aeson.Encoding.Internal.unsafePairSBS
+                              _let0_aSCQr (toEncoding arg1_aSCQo))
                          <>
-                           ((Data.Aeson.Encoding.Internal.unsafePairSBS _let1_aGvzx)
-                              (toEncoding arg1_aGvzq)
+                           ((if omitField arg2_aSCQp then
+                                 mempty
+                             else
+                                 Data.Aeson.Encoding.Internal.unsafePairSBS
+                                   _let1_aSCQs (toEncoding arg2_aSCQp))
                               <>
-                                (Data.Aeson.Encoding.Internal.unsafePairSBS _let2_aGvzy)
-                                  (toEncoding arg2_aGvzr)))
+                                (if omitField arg3_aSCQq then
+                                     mempty
+                                 else
+                                     Data.Aeson.Encoding.Internal.unsafePairSBS
+                                       _let2_aSCQv (toEncoding arg3_aSCQq))))
 instance FromJSON NotificationMessage where
   parseJSON
-    = \ value_aGvzz
-        -> case value_aGvzz of
-             Object recObj_aGvzA
+    = \ value_aSCQy
+        -> case value_aSCQy of
+             Object recObj_aSCQz
                -> (((NotificationMessage
                        <$>
-                         ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
-                              "Language.LSP.Protocol.Message.Types.NotificationMessage")
-                             "NotificationMessage")
-                            recObj_aGvzA)
+                         Language.LSP.Protocol.AesonUnsafe.lookupFieldOmit
+                           omittedField parseJSON
+                           "Language.LSP.Protocol.Message.Types.NotificationMessage"
+                           "NotificationMessage" recObj_aSCQz
                            (Data.Aeson.Key.fromString "jsonrpc"))
                       <*>
-                        ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
-                             "Language.LSP.Protocol.Message.Types.NotificationMessage")
-                            "NotificationMessage")
-                           recObj_aGvzA)
+                        Language.LSP.Protocol.AesonUnsafe.lookupFieldOmit
+                          omittedField parseJSON
+                          "Language.LSP.Protocol.Message.Types.NotificationMessage"
+                          "NotificationMessage" recObj_aSCQz
                           (Data.Aeson.Key.fromString "method"))
                      <*>
-                       ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
-                            "Language.LSP.Protocol.Message.Types.NotificationMessage")
-                           "NotificationMessage")
-                          recObj_aGvzA)
+                       Language.LSP.Protocol.AesonUnsafe.lookupFieldOmit
+                         omittedField parseJSON
+                         "Language.LSP.Protocol.Message.Types.NotificationMessage"
+                         "NotificationMessage" recObj_aSCQz
                          (Data.Aeson.Key.fromString "params"))
-             other_aGvzF
-               -> (((Language.LSP.Protocol.AesonUnsafe.parseTypeMismatch' "NotificationMessage")
-                      "Language.LSP.Protocol.Message.Types.NotificationMessage")
-                     "Object")
-                    (Language.LSP.Protocol.AesonUnsafe.valueConName other_aGvzF)
+             other_aSCQG
+               -> Language.LSP.Protocol.AesonUnsafe.parseTypeMismatch'
+                    "NotificationMessage"
+                    "Language.LSP.Protocol.Message.Types.NotificationMessage" "Object"
+                    (Language.LSP.Protocol.AesonUnsafe.valueConName other_aSCQG)
 
 deriving via ViaJSON NotificationMessage instance Pretty NotificationMessage
 
@@ -136,100 +143,109 @@ instance ToJSON RequestMessage where
   toJSON
     = let
       in
-        \ value_aGvLi
-          -> case value_aGvLi of
-               RequestMessage arg1_aGvLp arg2_aGvLq arg3_aGvLr arg4_aGvLs
+        \ value_aSD4t
+          -> case value_aSD4t of
+               RequestMessage arg1_aSD4A arg2_aSD4B arg3_aSD4C arg4_aSD4D
                  -> Language.LSP.Protocol.AesonUnsafe.fromPairs
-                      (((maybe mempty)
-                          (\ x_aGvLt
-                             -> (Language.LSP.Protocol.AesonUnsafe.pair
-                                   (Data.Aeson.Key.fromString "params"))
-                                  (toJSON x_aGvLt)))
-                         arg4_aGvLs
+                      ((if omitField arg1_aSD4A then
+                            mempty
+                        else
+                            Language.LSP.Protocol.AesonUnsafe.pair
+                              (Data.Aeson.Key.fromString "jsonrpc") (toJSON arg1_aSD4A))
                          <>
-                           ((Language.LSP.Protocol.AesonUnsafe.pair
-                               (Data.Aeson.Key.fromString "jsonrpc"))
-                              (toJSON arg1_aGvLp)
+                           ((if omitField arg2_aSD4B then
+                                 mempty
+                             else
+                                 Language.LSP.Protocol.AesonUnsafe.pair
+                                   (Data.Aeson.Key.fromString "id") (toJSON arg2_aSD4B))
                               <>
-                                ((Language.LSP.Protocol.AesonUnsafe.pair
-                                    (Data.Aeson.Key.fromString "id"))
-                                   (toJSON arg2_aGvLq)
+                                ((if omitField arg3_aSD4C then
+                                      mempty
+                                  else
+                                      Language.LSP.Protocol.AesonUnsafe.pair
+                                        (Data.Aeson.Key.fromString "method")
+                                        (toJSON arg3_aSD4C))
                                    <>
-                                     (Language.LSP.Protocol.AesonUnsafe.pair
-                                        (Data.Aeson.Key.fromString "method"))
-                                       (toJSON arg3_aGvLr))))
+                                     (if omitField arg4_aSD4D then
+                                          mempty
+                                      else
+                                          Language.LSP.Protocol.AesonUnsafe.pair
+                                            (Data.Aeson.Key.fromString "params")
+                                            (toJSON arg4_aSD4D)))))
   toEncoding
     = let
-        _let2_aGvLQ
-          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
-               5)
-              "\"id\":"#
-        _let1_aGvLP
-          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
-               10)
-              "\"jsonrpc\":"#
-        _let3_aGvLV
-          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
-               9)
-              "\"method\":"#
-        _let0_aGvLM
-          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
-               9)
-              "\"params\":"#
+        _let1_aSD56
+          = Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+              5 "\"id\":"#
+        _let0_aSD51
+          = Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+              10 "\"jsonrpc\":"#
+        _let2_aSD5b
+          = Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+              9 "\"method\":"#
+        _let3_aSD5e
+          = Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+              9 "\"params\":"#
       in
-        \ value_aGvLA
-          -> case value_aGvLA of
-               RequestMessage arg1_aGvLH arg2_aGvLI arg3_aGvLJ arg4_aGvLK
+        \ value_aSD4Q
+          -> case value_aSD4Q of
+               RequestMessage arg1_aSD4X arg2_aSD4Y arg3_aSD4Z arg4_aSD50
                  -> Language.LSP.Protocol.AesonUnsafe.fromPairs
-                      (((maybe mempty)
-                          (\ x_aGvLL
-                             -> (Data.Aeson.Encoding.Internal.unsafePairSBS _let0_aGvLM)
-                                  (toEncoding x_aGvLL)))
-                         arg4_aGvLK
+                      ((if omitField arg1_aSD4X then
+                            mempty
+                        else
+                            Data.Aeson.Encoding.Internal.unsafePairSBS
+                              _let0_aSD51 (toEncoding arg1_aSD4X))
                          <>
-                           ((Data.Aeson.Encoding.Internal.unsafePairSBS _let1_aGvLP)
-                              (toEncoding arg1_aGvLH)
+                           ((if omitField arg2_aSD4Y then
+                                 mempty
+                             else
+                                 Data.Aeson.Encoding.Internal.unsafePairSBS
+                                   _let1_aSD56 (toEncoding arg2_aSD4Y))
                               <>
-                                ((Data.Aeson.Encoding.Internal.unsafePairSBS _let2_aGvLQ)
-                                   (toEncoding arg2_aGvLI)
+                                ((if omitField arg3_aSD4Z then
+                                      mempty
+                                  else
+                                      Data.Aeson.Encoding.Internal.unsafePairSBS
+                                        _let2_aSD5b (toEncoding arg3_aSD4Z))
                                    <>
-                                     (Data.Aeson.Encoding.Internal.unsafePairSBS _let3_aGvLV)
-                                       (toEncoding arg3_aGvLJ))))
+                                     (if omitField arg4_aSD50 then
+                                          mempty
+                                      else
+                                          Data.Aeson.Encoding.Internal.unsafePairSBS
+                                            _let3_aSD5e (toEncoding arg4_aSD50)))))
 instance FromJSON RequestMessage where
   parseJSON
-    = \ value_aGvLW
-        -> case value_aGvLW of
-             Object recObj_aGvLX
+    = \ value_aSD5h
+        -> case value_aSD5h of
+             Object recObj_aSD5i
                -> ((((RequestMessage
                         <$>
-                          ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
-                               "Language.LSP.Protocol.Message.Types.RequestMessage")
-                              "RequestMessage")
-                             recObj_aGvLX)
+                          Language.LSP.Protocol.AesonUnsafe.lookupFieldOmit
+                            omittedField parseJSON
+                            "Language.LSP.Protocol.Message.Types.RequestMessage"
+                            "RequestMessage" recObj_aSD5i
                             (Data.Aeson.Key.fromString "jsonrpc"))
                        <*>
-                         ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
-                              "Language.LSP.Protocol.Message.Types.RequestMessage")
-                             "RequestMessage")
-                            recObj_aGvLX)
-                           (Data.Aeson.Key.fromString "id"))
+                         Language.LSP.Protocol.AesonUnsafe.lookupFieldOmit
+                           omittedField parseJSON
+                           "Language.LSP.Protocol.Message.Types.RequestMessage"
+                           "RequestMessage" recObj_aSD5i (Data.Aeson.Key.fromString "id"))
                       <*>
-                        ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
-                             "Language.LSP.Protocol.Message.Types.RequestMessage")
-                            "RequestMessage")
-                           recObj_aGvLX)
-                          (Data.Aeson.Key.fromString "method"))
+                        Language.LSP.Protocol.AesonUnsafe.lookupFieldOmit
+                          omittedField parseJSON
+                          "Language.LSP.Protocol.Message.Types.RequestMessage"
+                          "RequestMessage" recObj_aSD5i (Data.Aeson.Key.fromString "method"))
                      <*>
-                       ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
-                            "Language.LSP.Protocol.Message.Types.RequestMessage")
-                           "RequestMessage")
-                          recObj_aGvLX)
-                         (Data.Aeson.Key.fromString "params"))
-             other_aGvMa
-               -> (((Language.LSP.Protocol.AesonUnsafe.parseTypeMismatch' "RequestMessage")
-                      "Language.LSP.Protocol.Message.Types.RequestMessage")
-                     "Object")
-                    (Language.LSP.Protocol.AesonUnsafe.valueConName other_aGvMa)
+                       Language.LSP.Protocol.AesonUnsafe.lookupFieldOmit
+                         omittedField parseJSON
+                         "Language.LSP.Protocol.Message.Types.RequestMessage"
+                         "RequestMessage" recObj_aSD5i (Data.Aeson.Key.fromString "params"))
+             other_aSD5B
+               -> Language.LSP.Protocol.AesonUnsafe.parseTypeMismatch'
+                    "RequestMessage"
+                    "Language.LSP.Protocol.Message.Types.RequestMessage" "Object"
+                    (Language.LSP.Protocol.AesonUnsafe.valueConName other_aSD5B)
 
 deriving via ViaJSON RequestMessage instance Pretty RequestMessage
 
@@ -260,54 +276,60 @@ instance ToJSON ResponseError where
   toJSON
     = let
       in
-        \ value_aGvWC
-          -> case value_aGvWC of
-               ResponseError arg1_aGvWJ arg2_aGvWK arg3_aGvWL
+        \ value_aSDiH
+          -> case value_aSDiH of
+               ResponseError arg1_aSDiO arg2_aSDiP arg3_aSDiQ
                  -> Language.LSP.Protocol.AesonUnsafe.fromPairs
-                      (((maybe mempty)
-                          (\ x_aGvWM
-                             -> (Language.LSP.Protocol.AesonUnsafe.pair
-                                   (Data.Aeson.Key.fromString "data"))
-                                  (toJSON x_aGvWM)))
-                         arg3_aGvWL
+                      ((if omitField arg1_aSDiO then
+                            mempty
+                        else
+                            Language.LSP.Protocol.AesonUnsafe.pair
+                              (Data.Aeson.Key.fromString "code") (toJSON arg1_aSDiO))
                          <>
-                           ((Language.LSP.Protocol.AesonUnsafe.pair
-                               (Data.Aeson.Key.fromString "code"))
-                              (toJSON arg1_aGvWJ)
+                           ((if omitField arg2_aSDiP then
+                                 mempty
+                             else
+                                 Language.LSP.Protocol.AesonUnsafe.pair
+                                   (Data.Aeson.Key.fromString "message") (toJSON arg2_aSDiP))
                               <>
-                                (Language.LSP.Protocol.AesonUnsafe.pair
-                                   (Data.Aeson.Key.fromString "message"))
-                                  (toJSON arg2_aGvWK)))
+                                (if omitField arg3_aSDiQ then
+                                     mempty
+                                 else
+                                     Language.LSP.Protocol.AesonUnsafe.pair
+                                       (Data.Aeson.Key.fromString "data") (toJSON arg3_aSDiQ))))
   toEncoding
     = let
-        _let1_aGvX7
-          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
-               7)
-              "\"code\":"#
-        _let0_aGvX4
-          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
-               7)
-              "\"data\":"#
-        _let2_aGvXc
-          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
-               10)
-              "\"message\":"#
+        _let0_aSDjh
+          = Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+              7 "\"code\":"#
+        _let2_aSDjp
+          = Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+              7 "\"data\":"#
+        _let1_aSDjm
+          = Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+              10 "\"message\":"#
       in
-        \ value_aGvWT
-          -> case value_aGvWT of
-               ResponseError arg1_aGvX0 arg2_aGvX1 arg3_aGvX2
+        \ value_aSDj3
+          -> case value_aSDj3 of
+               ResponseError arg1_aSDja arg2_aSDjb arg3_aSDjc
                  -> Language.LSP.Protocol.AesonUnsafe.fromPairs
-                      (((maybe mempty)
-                          (\ x_aGvX3
-                             -> (Data.Aeson.Encoding.Internal.unsafePairSBS _let0_aGvX4)
-                                  (toEncoding x_aGvX3)))
-                         arg3_aGvX2
+                      ((if omitField arg1_aSDja then
+                            mempty
+                        else
+                            Data.Aeson.Encoding.Internal.unsafePairSBS
+                              _let0_aSDjh (toEncoding arg1_aSDja))
                          <>
-                           ((Data.Aeson.Encoding.Internal.unsafePairSBS _let1_aGvX7)
-                              (toEncoding arg1_aGvX0)
+                           ((if omitField arg2_aSDjb then
+                                 mempty
+                             else
+                                 Data.Aeson.Encoding.Internal.unsafePairSBS
+                                   _let1_aSDjm (toEncoding arg2_aSDjb))
                               <>
-                                (Data.Aeson.Encoding.Internal.unsafePairSBS _let2_aGvXc)
-                                  (toEncoding arg2_aGvX1)))
+                                (if omitField arg3_aSDjc then
+                                     mempty
+                                 else
+                                     Data.Aeson.Encoding.Internal.unsafePairSBS
+                                       _let2_aSDjp (toEncoding arg3_aSDjc))))
 
 instance FromJSON ResponseError where
   parseJSON =
@@ -338,106 +360,110 @@ instance ToJSON ResponseMessage where
   toJSON
     = let
       in
-        \ value_aGw9h
-          -> case value_aGw9h of
-               ResponseMessage arg1_aGw9u arg2_aGw9v arg3_aGw9w arg4_aGw9x
+        \ value_aSDxW
+          -> case value_aSDxW of
+               ResponseMessage arg1_aSDy9 arg2_aSDya arg3_aSDyb arg4_aSDyc
                  -> Language.LSP.Protocol.AesonUnsafe.fromPairs
-                      ((((maybe mempty)
-                           (\ x_aGw9y
-                              -> (Language.LSP.Protocol.AesonUnsafe.pair
-                                    (Data.Aeson.Key.fromString "result"))
-                                   (toJSON x_aGw9y)))
-                          arg3_aGw9w
-                          <>
-                            ((maybe mempty)
-                               (\ x_aGw9B
-                                  -> (Language.LSP.Protocol.AesonUnsafe.pair
-                                        (Data.Aeson.Key.fromString "error"))
-                                       (toJSON x_aGw9B)))
-                              arg4_aGw9x)
+                      ((if omitField arg1_aSDy9 then
+                            mempty
+                        else
+                            Language.LSP.Protocol.AesonUnsafe.pair
+                              (Data.Aeson.Key.fromString "jsonrpc") (toJSON arg1_aSDy9))
                          <>
-                           ((Language.LSP.Protocol.AesonUnsafe.pair
-                               (Data.Aeson.Key.fromString "jsonrpc"))
-                              (toJSON arg1_aGw9u)
+                           ((if omitField arg2_aSDya then
+                                 mempty
+                             else
+                                 Language.LSP.Protocol.AesonUnsafe.pair
+                                   (Data.Aeson.Key.fromString "id") (toJSON arg2_aSDya))
                               <>
-                                (Language.LSP.Protocol.AesonUnsafe.pair
-                                   (Data.Aeson.Key.fromString "id"))
-                                  (toJSON arg2_aGw9v)))
+                                ((if omitField arg3_aSDyb then
+                                      mempty
+                                  else
+                                      Language.LSP.Protocol.AesonUnsafe.pair
+                                        (Data.Aeson.Key.fromString "result")
+                                        (toJSON arg3_aSDyb))
+                                   <>
+                                     (if omitField arg4_aSDyc then
+                                          mempty
+                                      else
+                                          Language.LSP.Protocol.AesonUnsafe.pair
+                                            (Data.Aeson.Key.fromString "error")
+                                            (toJSON arg4_aSDyc)))))
   toEncoding
     = let
-        _let1_aGwa4
-          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
-               8)
-              "\"error\":"#
-        _let3_aGwa8
-          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
-               5)
-              "\"id\":"#
-        _let2_aGwa7
-          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
-               10)
-              "\"jsonrpc\":"#
-        _let0_aGwa0
-          = (Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
-               9)
-              "\"result\":"#
+        _let3_aSDz1
+          = Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+              8 "\"error\":"#
+        _let1_aSDyP
+          = Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+              5 "\"id\":"#
+        _let0_aSDyK
+          = Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+              10 "\"jsonrpc\":"#
+        _let2_aSDyW
+          = Language.LSP.Protocol.AesonUnsafe.unsafePackLenLiteral
+              9 "\"result\":"#
       in
-        \ value_aGw9I
-          -> case value_aGw9I of
-               ResponseMessage arg1_aGw9V arg2_aGw9W arg3_aGw9X arg4_aGw9Y
+        \ value_aSDyt
+          -> case value_aSDyt of
+               ResponseMessage arg1_aSDyG arg2_aSDyH arg3_aSDyI arg4_aSDyJ
                  -> Language.LSP.Protocol.AesonUnsafe.fromPairs
-                      ((((maybe mempty)
-                           (\ x_aGw9Z
-                              -> (Data.Aeson.Encoding.Internal.unsafePairSBS _let0_aGwa0)
-                                   (toEncoding x_aGw9Z)))
-                          arg3_aGw9X
-                          <>
-                            ((maybe mempty)
-                               (\ x_aGwa3
-                                  -> (Data.Aeson.Encoding.Internal.unsafePairSBS _let1_aGwa4)
-                                       (toEncoding x_aGwa3)))
-                              arg4_aGw9Y)
+                      ((if omitField arg1_aSDyG then
+                            mempty
+                        else
+                            Data.Aeson.Encoding.Internal.unsafePairSBS
+                              _let0_aSDyK (toEncoding arg1_aSDyG))
                          <>
-                           ((Data.Aeson.Encoding.Internal.unsafePairSBS _let2_aGwa7)
-                              (toEncoding arg1_aGw9V)
+                           ((if omitField arg2_aSDyH then
+                                 mempty
+                             else
+                                 Data.Aeson.Encoding.Internal.unsafePairSBS
+                                   _let1_aSDyP (toEncoding arg2_aSDyH))
                               <>
-                                (Data.Aeson.Encoding.Internal.unsafePairSBS _let3_aGwa8)
-                                  (toEncoding arg2_aGw9W)))
+                                ((if omitField arg3_aSDyI then
+                                      mempty
+                                  else
+                                      Data.Aeson.Encoding.Internal.unsafePairSBS
+                                        _let2_aSDyW (toEncoding arg3_aSDyI))
+                                   <>
+                                     (if omitField arg4_aSDyJ then
+                                          mempty
+                                      else
+                                          Data.Aeson.Encoding.Internal.unsafePairSBS
+                                            _let3_aSDz1 (toEncoding arg4_aSDyJ)))))
 instance FromJSON ResponseMessage where
   parseJSON
-    = \ value_aGwad
-        -> case value_aGwad of
-             Object recObj_aGwae
+    = \ value_aSDz4
+        -> case value_aSDz4 of
+             Object recObj_aSDz5
                -> ((((ResponseMessage
                         <$>
-                          ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
-                               "Language.LSP.Protocol.Message.Types.ResponseMessage")
-                              "ResponseMessage")
-                             recObj_aGwae)
+                          Language.LSP.Protocol.AesonUnsafe.lookupFieldOmit
+                            omittedField parseJSON
+                            "Language.LSP.Protocol.Message.Types.ResponseMessage"
+                            "ResponseMessage" recObj_aSDz5
                             (Data.Aeson.Key.fromString "jsonrpc"))
                        <*>
-                         ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
-                              "Language.LSP.Protocol.Message.Types.ResponseMessage")
-                             "ResponseMessage")
-                            recObj_aGwae)
-                           (Data.Aeson.Key.fromString "id"))
+                         Language.LSP.Protocol.AesonUnsafe.lookupFieldOmit
+                           omittedField parseJSON
+                           "Language.LSP.Protocol.Message.Types.ResponseMessage"
+                           "ResponseMessage" recObj_aSDz5 (Data.Aeson.Key.fromString "id"))
                       <*>
-                        ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
-                             "Language.LSP.Protocol.Message.Types.ResponseMessage")
-                            "ResponseMessage")
-                           recObj_aGwae)
+                        Language.LSP.Protocol.AesonUnsafe.lookupFieldOmit
+                          omittedField parseJSON
+                          "Language.LSP.Protocol.Message.Types.ResponseMessage"
+                          "ResponseMessage" recObj_aSDz5
                           (Data.Aeson.Key.fromString "result"))
                      <*>
-                       ((((Language.LSP.Protocol.AesonUnsafe.lookupField parseJSON)
-                            "Language.LSP.Protocol.Message.Types.ResponseMessage")
-                           "ResponseMessage")
-                          recObj_aGwae)
-                         (Data.Aeson.Key.fromString "error"))
-             other_aGwaz
-               -> (((Language.LSP.Protocol.AesonUnsafe.parseTypeMismatch' "ResponseMessage")
-                      "Language.LSP.Protocol.Message.Types.ResponseMessage")
-                     "Object")
-                    (Language.LSP.Protocol.AesonUnsafe.valueConName other_aGwaz)
+                       Language.LSP.Protocol.AesonUnsafe.lookupFieldOmit
+                         omittedField parseJSON
+                         "Language.LSP.Protocol.Message.Types.ResponseMessage"
+                         "ResponseMessage" recObj_aSDz5 (Data.Aeson.Key.fromString "error"))
+             other_aSDzy
+               -> Language.LSP.Protocol.AesonUnsafe.parseTypeMismatch'
+                    "ResponseMessage"
+                    "Language.LSP.Protocol.Message.Types.ResponseMessage" "Object"
+                    (Language.LSP.Protocol.AesonUnsafe.valueConName other_aSDzy)
 
 
 deriving via ViaJSON ResponseMessage instance Pretty ResponseMessage

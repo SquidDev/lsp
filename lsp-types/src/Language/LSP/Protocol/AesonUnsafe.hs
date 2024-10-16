@@ -6,7 +6,7 @@ module Language.LSP.Protocol.AesonUnsafe
     , parseTypeMismatch'
     , fromPairs
     , pair
-    , lookupField
+    , lookupFieldOmit
     ) where
 
 import Data.Aeson.Types
@@ -30,10 +30,13 @@ valueConName (Number _) = "Number"
 valueConName (Bool   _) = "Boolean"
 valueConName Null       = "Null"
 
-lookupField :: (Value -> Parser a) -> String -> String -> Object -> Key -> Parser a
-lookupField pj tName rec obj key =
+lookupFieldOmit :: Maybe a -> (Value -> Parser a) -> String -> String -> Object -> Key -> Parser a
+lookupFieldOmit maybeDefault pj tName rec obj key =
     case KM.lookup key obj of
-      Nothing -> unknownFieldFail tName rec (Key.toString key)
+      Nothing ->
+        case maybeDefault of
+          Nothing -> unknownFieldFail tName rec (Key.toString key)
+          Just x -> pure x
       Just v  -> pj v <?> Key key
 
 unknownFieldFail :: String -> String -> String -> Parser fail

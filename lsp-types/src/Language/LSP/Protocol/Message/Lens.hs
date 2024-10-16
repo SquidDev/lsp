@@ -5,269 +5,256 @@
 module Language.LSP.Protocol.Message.Lens where
 
 import Control.Lens.TH
-import qualified Language.LSP.Protocol.Message.LspId
-import qualified Control.Lens.Type
-import qualified Language.LSP.Protocol.Types.Common
-import qualified Language.LSP.Protocol.Internal.Method
-import qualified GHC.Int
 import qualified Language.LSP.Protocol.Internal.Types.LSPErrorCodes
 import qualified Language.LSP.Protocol.Internal.Types.ErrorCodes
+import qualified Language.LSP.Protocol.Message.LspId
 import qualified Language.LSP.Protocol.Message.Method
+import qualified Data.Text.Internal
+import qualified Language.LSP.Protocol.Internal.Method
+import qualified Language.LSP.Protocol.Types.Common
 import qualified Data.Aeson.Types
 import qualified Language.LSP.Protocol.Message.Meta
-import qualified Data.Text.Internal
+import qualified GHC.Int
+import qualified Control.Lens.Type
 import Data.Kind
 import Language.LSP.Protocol.Message.Registration
 import Language.LSP.Protocol.Message.Types
 import Language.LSP.Protocol.Types.Lens
 
-instance HasId (TRegistration (m_iHqXJ :: Language.LSP.Protocol.Internal.Method.Method 'Language.LSP.Protocol.Message.Meta.ClientToServer t_iHqXI)) Data.Text.Internal.Text where
+instance HasId (TRegistration (m_iTxyL :: Language.LSP.Protocol.Internal.Method.Method 'Language.LSP.Protocol.Message.Meta.ClientToServer t_iTxyK)) Data.Text.Internal.Text where
   {-# INLINE id #-}
-  id f_aIE6p (TRegistration x1_aIE6q x2_aIE6r x3_aIE6s)
-    = (fmap
-         (\ y1_aIE6t -> ((TRegistration y1_aIE6t) x2_aIE6r) x3_aIE6s))
-        (f_aIE6p x1_aIE6q)
-instance HasMethod (TRegistration (m_iHqXJ :: Language.LSP.Protocol.Internal.Method.Method 'Language.LSP.Protocol.Message.Meta.ClientToServer t_iHqXI)) (Language.LSP.Protocol.Message.Method.SClientMethod m_iHqXJ) where
+  id f_aUISe (TRegistration x1_aUISf x2_aUISg x3_aUISh)
+    = fmap
+        (\ y1_aUISi -> TRegistration y1_aUISi x2_aUISg x3_aUISh)
+        (f_aUISe x1_aUISf)
+instance HasMethod (TRegistration (m_iTxyL :: Language.LSP.Protocol.Internal.Method.Method 'Language.LSP.Protocol.Message.Meta.ClientToServer t_iTxyK)) (Language.LSP.Protocol.Message.Method.SClientMethod m_iTxyL) where
   {-# INLINE method #-}
-  method f_aIE6C (TRegistration x1_aIE6D x2_aIE6E x3_aIE6F)
-    = (fmap
-         (\ y1_aIE6G -> ((TRegistration x1_aIE6D) y1_aIE6G) x3_aIE6F))
-        (f_aIE6C x2_aIE6E)
-instance (a_aIE6L
+  method f_aUISr (TRegistration x1_aUISs x2_aUISt x3_aUISu)
+    = fmap
+        (\ y1_aUISv -> TRegistration x1_aUISs y1_aUISv x3_aUISu)
+        (f_aUISr x2_aUISt)
+instance (a_aUISA
           ~
-          Maybe (Language.LSP.Protocol.Internal.Method.RegistrationOptions m_iHqXJ)) =>
-         HasRegisterOptions (TRegistration (m_iHqXJ :: Language.LSP.Protocol.Internal.Method.Method 'Language.LSP.Protocol.Message.Meta.ClientToServer t_iHqXI)) a_aIE6L where
+          Maybe (Language.LSP.Protocol.Internal.Method.RegistrationOptions m_iTxyL)) =>
+         HasRegisterOptions (TRegistration (m_iTxyL :: Language.LSP.Protocol.Internal.Method.Method 'Language.LSP.Protocol.Message.Meta.ClientToServer t_iTxyK)) a_aUISA where
   {-# INLINE registerOptions #-}
-  registerOptions f_aIE6M (TRegistration x1_aIE6N x2_aIE6O x3_aIE6P)
-    = (fmap
-         (\ y1_aIE6Q -> ((TRegistration x1_aIE6N) x2_aIE6O) y1_aIE6Q))
-        (f_aIE6M x3_aIE6P)
+  registerOptions f_aUISB (TRegistration x1_aUISC x2_aUISD x3_aUISE)
+    = fmap
+        (\ y1_aUISF -> TRegistration x1_aUISC x2_aUISD y1_aUISF)
+        (f_aUISB x3_aUISE)
 
-instance HasId (TUnregistration (m_iHqXF :: Language.LSP.Protocol.Internal.Method.Method 'Language.LSP.Protocol.Message.Meta.ClientToServer t_iHqXE)) Data.Text.Internal.Text where
+instance HasId (TUnregistration (m_iTxyH :: Language.LSP.Protocol.Internal.Method.Method 'Language.LSP.Protocol.Message.Meta.ClientToServer t_iTxyG)) Data.Text.Internal.Text where
   {-# INLINE id #-}
-  id f_aIE9I (TUnregistration x1_aIE9J x2_aIE9K)
-    = (fmap (\ y1_aIE9L -> (TUnregistration y1_aIE9L) x2_aIE9K))
-        (f_aIE9I x1_aIE9J)
-instance HasMethod (TUnregistration (m_iHqXF :: Language.LSP.Protocol.Internal.Method.Method 'Language.LSP.Protocol.Message.Meta.ClientToServer t_iHqXE)) (Language.LSP.Protocol.Internal.Method.SMethod m_iHqXF) where
+  id f_aUIW3 (TUnregistration x1_aUIW4 x2_aUIW5)
+    = fmap
+        (\ y1_aUIW6 -> TUnregistration y1_aUIW6 x2_aUIW5)
+        (f_aUIW3 x1_aUIW4)
+instance HasMethod (TUnregistration (m_iTxyH :: Language.LSP.Protocol.Internal.Method.Method 'Language.LSP.Protocol.Message.Meta.ClientToServer t_iTxyG)) (Language.LSP.Protocol.Internal.Method.SMethod m_iTxyH) where
   {-# INLINE method #-}
-  method f_aIE9U (TUnregistration x1_aIE9V x2_aIE9W)
-    = (fmap (\ y1_aIE9X -> (TUnregistration x1_aIE9V) y1_aIE9X))
-        (f_aIE9U x2_aIE9W)
+  method f_aUIWf (TUnregistration x1_aUIWg x2_aUIWh)
+    = fmap
+        (\ y1_aUIWi -> TUnregistration x1_aUIWg y1_aUIWi)
+        (f_aUIWf x2_aUIWh)
 
 instance HasId RequestMessage ((Language.LSP.Protocol.Types.Common.|?) GHC.Int.Int32 Data.Text.Internal.Text) where
   {-# INLINE id #-}
-  id f_aIEbH (RequestMessage x1_aIEbI x2_aIEbJ x3_aIEbK x4_aIEbL)
-    = (fmap
-         (\ y1_aIEbM
-            -> (((RequestMessage x1_aIEbI) y1_aIEbM) x3_aIEbK) x4_aIEbL))
-        (f_aIEbH x2_aIEbJ)
+  id f_aUIYk (RequestMessage x1_aUIYl x2_aUIYm x3_aUIYn x4_aUIYo)
+    = fmap
+        (\ y1_aUIYp -> RequestMessage x1_aUIYl y1_aUIYp x3_aUIYn x4_aUIYo)
+        (f_aUIYk x2_aUIYm)
 class HasJsonrpc s a | s -> a where
   jsonrpc :: Control.Lens.Type.Lens' s a
 instance HasJsonrpc RequestMessage Data.Text.Internal.Text where
   {-# INLINE jsonrpc #-}
   jsonrpc
-    f_aIEbN
-    (RequestMessage x1_aIEbO x2_aIEbP x3_aIEbQ x4_aIEbR)
-    = (fmap
-         (\ y1_aIEbS
-            -> (((RequestMessage y1_aIEbS) x2_aIEbP) x3_aIEbQ) x4_aIEbR))
-        (f_aIEbN x1_aIEbO)
+    f_aUIYq
+    (RequestMessage x1_aUIYr x2_aUIYs x3_aUIYt x4_aUIYu)
+    = fmap
+        (\ y1_aUIYv -> RequestMessage y1_aUIYv x2_aUIYs x3_aUIYt x4_aUIYu)
+        (f_aUIYq x1_aUIYr)
 instance HasMethod RequestMessage Data.Text.Internal.Text where
   {-# INLINE method #-}
-  method f_aIEbT (RequestMessage x1_aIEbU x2_aIEbV x3_aIEbW x4_aIEbX)
-    = (fmap
-         (\ y1_aIEbY
-            -> (((RequestMessage x1_aIEbU) x2_aIEbV) y1_aIEbY) x4_aIEbX))
-        (f_aIEbT x3_aIEbW)
+  method f_aUIYw (RequestMessage x1_aUIYx x2_aUIYy x3_aUIYz x4_aUIYA)
+    = fmap
+        (\ y1_aUIYB -> RequestMessage x1_aUIYx x2_aUIYy y1_aUIYB x4_aUIYA)
+        (f_aUIYw x3_aUIYz)
 class HasParams s a | s -> a where
   params :: Control.Lens.Type.Lens' s a
 instance HasParams RequestMessage (Maybe Data.Aeson.Types.Value) where
   {-# INLINE params #-}
-  params f_aIEc3 (RequestMessage x1_aIEc4 x2_aIEc5 x3_aIEc6 x4_aIEc7)
-    = (fmap
-         (\ y1_aIEc8
-            -> (((RequestMessage x1_aIEc4) x2_aIEc5) x3_aIEc6) y1_aIEc8))
-        (f_aIEc3 x4_aIEc7)
+  params f_aUIYG (RequestMessage x1_aUIYH x2_aUIYI x3_aUIYJ x4_aUIYK)
+    = fmap
+        (\ y1_aUIYL -> RequestMessage x1_aUIYH x2_aUIYI x3_aUIYJ y1_aUIYL)
+        (f_aUIYG x4_aUIYK)
 
 class HasError s a | s -> a where
   error :: Control.Lens.Type.Lens' s a
 instance HasError ResponseMessage (Maybe ResponseError) where
   {-# INLINE error #-}
-  error f_aIEf2 (ResponseMessage x1_aIEf3 x2_aIEf4 x3_aIEf5 x4_aIEf6)
-    = (fmap
-         (\ y1_aIEf7
-            -> (((ResponseMessage x1_aIEf3) x2_aIEf4) x3_aIEf5) y1_aIEf7))
-        (f_aIEf2 x4_aIEf6)
+  error f_aUJ2j (ResponseMessage x1_aUJ2k x2_aUJ2l x3_aUJ2m x4_aUJ2n)
+    = fmap
+        (\ y1_aUJ2o -> ResponseMessage x1_aUJ2k x2_aUJ2l x3_aUJ2m y1_aUJ2o)
+        (f_aUJ2j x4_aUJ2n)
 instance HasId ResponseMessage ((Language.LSP.Protocol.Types.Common.|?) GHC.Int.Int32 ((Language.LSP.Protocol.Types.Common.|?) Data.Text.Internal.Text Language.LSP.Protocol.Types.Common.Null)) where
   {-# INLINE id #-}
-  id f_aIEfo (ResponseMessage x1_aIEfp x2_aIEfq x3_aIEfr x4_aIEfs)
-    = (fmap
-         (\ y1_aIEft
-            -> (((ResponseMessage x1_aIEfp) y1_aIEft) x3_aIEfr) x4_aIEfs))
-        (f_aIEfo x2_aIEfq)
+  id f_aUJ2F (ResponseMessage x1_aUJ2G x2_aUJ2H x3_aUJ2I x4_aUJ2J)
+    = fmap
+        (\ y1_aUJ2K -> ResponseMessage x1_aUJ2G y1_aUJ2K x3_aUJ2I x4_aUJ2J)
+        (f_aUJ2F x2_aUJ2H)
 instance HasJsonrpc ResponseMessage Data.Text.Internal.Text where
   {-# INLINE jsonrpc #-}
   jsonrpc
-    f_aIEfu
-    (ResponseMessage x1_aIEfv x2_aIEfw x3_aIEfx x4_aIEfy)
-    = (fmap
-         (\ y1_aIEfz
-            -> (((ResponseMessage y1_aIEfz) x2_aIEfw) x3_aIEfx) x4_aIEfy))
-        (f_aIEfu x1_aIEfv)
+    f_aUJ2L
+    (ResponseMessage x1_aUJ2M x2_aUJ2N x3_aUJ2O x4_aUJ2P)
+    = fmap
+        (\ y1_aUJ2Q -> ResponseMessage y1_aUJ2Q x2_aUJ2N x3_aUJ2O x4_aUJ2P)
+        (f_aUJ2L x1_aUJ2M)
 class HasResult s a | s -> a where
   result :: Control.Lens.Type.Lens' s a
 instance HasResult ResponseMessage (Maybe Data.Aeson.Types.Value) where
   {-# INLINE result #-}
   result
-    f_aIEfE
-    (ResponseMessage x1_aIEfF x2_aIEfG x3_aIEfH x4_aIEfI)
-    = (fmap
-         (\ y1_aIEfJ
-            -> (((ResponseMessage x1_aIEfF) x2_aIEfG) y1_aIEfJ) x4_aIEfI))
-        (f_aIEfE x3_aIEfH)
+    f_aUJ2V
+    (ResponseMessage x1_aUJ2W x2_aUJ2X x3_aUJ2Y x4_aUJ2Z)
+    = fmap
+        (\ y1_aUJ30 -> ResponseMessage x1_aUJ2W x2_aUJ2X y1_aUJ30 x4_aUJ2Z)
+        (f_aUJ2V x3_aUJ2Y)
 
 instance HasJsonrpc NotificationMessage Data.Text.Internal.Text where
   {-# INLINE jsonrpc #-}
-  jsonrpc f_aIEiz (NotificationMessage x1_aIEiA x2_aIEiB x3_aIEiC)
-    = (fmap
-         (\ y1_aIEiD -> ((NotificationMessage y1_aIEiD) x2_aIEiB) x3_aIEiC))
-        (f_aIEiz x1_aIEiA)
+  jsonrpc f_aUJ6u (NotificationMessage x1_aUJ6v x2_aUJ6w x3_aUJ6x)
+    = fmap
+        (\ y1_aUJ6y -> NotificationMessage y1_aUJ6y x2_aUJ6w x3_aUJ6x)
+        (f_aUJ6u x1_aUJ6v)
 instance HasMethod NotificationMessage Data.Text.Internal.Text where
   {-# INLINE method #-}
-  method f_aIEiE (NotificationMessage x1_aIEiF x2_aIEiG x3_aIEiH)
-    = (fmap
-         (\ y1_aIEiI -> ((NotificationMessage x1_aIEiF) y1_aIEiI) x3_aIEiH))
-        (f_aIEiE x2_aIEiG)
+  method f_aUJ6z (NotificationMessage x1_aUJ6A x2_aUJ6B x3_aUJ6C)
+    = fmap
+        (\ y1_aUJ6D -> NotificationMessage x1_aUJ6A y1_aUJ6D x3_aUJ6C)
+        (f_aUJ6z x2_aUJ6B)
 instance HasParams NotificationMessage (Maybe Data.Aeson.Types.Value) where
   {-# INLINE params #-}
-  params f_aIEiN (NotificationMessage x1_aIEiO x2_aIEiP x3_aIEiQ)
-    = (fmap
-         (\ y1_aIEiR -> ((NotificationMessage x1_aIEiO) x2_aIEiP) y1_aIEiR))
-        (f_aIEiN x3_aIEiQ)
+  params f_aUJ6I (NotificationMessage x1_aUJ6J x2_aUJ6K x3_aUJ6L)
+    = fmap
+        (\ y1_aUJ6M -> NotificationMessage x1_aUJ6J x2_aUJ6K y1_aUJ6M)
+        (f_aUJ6I x3_aUJ6L)
 
 instance HasCode ResponseError ((Language.LSP.Protocol.Types.Common.|?) Language.LSP.Protocol.Internal.Types.LSPErrorCodes.LSPErrorCodes Language.LSP.Protocol.Internal.Types.ErrorCodes.ErrorCodes) where
   {-# INLINE code #-}
-  code f_aIEko (ResponseError x1_aIEkp x2_aIEkq x3_aIEkr)
-    = (fmap
-         (\ y1_aIEks -> ((ResponseError y1_aIEks) x2_aIEkq) x3_aIEkr))
-        (f_aIEko x1_aIEkp)
+  code f_aUJ8L (ResponseError x1_aUJ8M x2_aUJ8N x3_aUJ8O)
+    = fmap
+        (\ y1_aUJ8P -> ResponseError y1_aUJ8P x2_aUJ8N x3_aUJ8O)
+        (f_aUJ8L x1_aUJ8M)
 instance HasMessage ResponseError Data.Text.Internal.Text where
   {-# INLINE message #-}
-  message f_aIEkt (ResponseError x1_aIEku x2_aIEkv x3_aIEkw)
-    = (fmap
-         (\ y1_aIEkx -> ((ResponseError x1_aIEku) y1_aIEkx) x3_aIEkw))
-        (f_aIEkt x2_aIEkv)
+  message f_aUJ8Q (ResponseError x1_aUJ8R x2_aUJ8S x3_aUJ8T)
+    = fmap
+        (\ y1_aUJ8U -> ResponseError x1_aUJ8R y1_aUJ8U x3_aUJ8T)
+        (f_aUJ8Q x2_aUJ8S)
 class HasXdata s a | s -> a where
   xdata :: Control.Lens.Type.Lens' s a
 instance HasXdata ResponseError (Maybe Data.Aeson.Types.Value) where
   {-# INLINE xdata #-}
-  xdata f_aIEkC (ResponseError x1_aIEkD x2_aIEkE x3_aIEkF)
-    = (fmap
-         (\ y1_aIEkG -> ((ResponseError x1_aIEkD) x2_aIEkE) y1_aIEkG))
-        (f_aIEkC x3_aIEkF)
+  xdata f_aUJ8Z (ResponseError x1_aUJ90 x2_aUJ91 x3_aUJ92)
+    = fmap
+        (\ y1_aUJ93 -> ResponseError x1_aUJ90 x2_aUJ91 y1_aUJ93)
+        (f_aUJ8Z x3_aUJ92)
 
-instance HasId (TRequestMessage (m_iGRPd :: Language.LSP.Protocol.Internal.Method.Method f_iGRPc 'Language.LSP.Protocol.Message.Meta.Request)) (Language.LSP.Protocol.Message.LspId.LspId m_iGRPd) where
+instance HasId (TRequestMessage (m_iSZlY :: Language.LSP.Protocol.Internal.Method.Method f_iSZlX 'Language.LSP.Protocol.Message.Meta.Request)) (Language.LSP.Protocol.Message.LspId.LspId m_iSZlY) where
   {-# INLINE id #-}
-  id f_aIEmK (TRequestMessage x1_aIEmL x2_aIEmM x3_aIEmN x4_aIEmO)
-    = (fmap
-         (\ y1_aIEmP
-            -> (((TRequestMessage x1_aIEmL) y1_aIEmP) x3_aIEmN) x4_aIEmO))
-        (f_aIEmK x2_aIEmM)
-instance HasJsonrpc (TRequestMessage (m_iGRPd :: Language.LSP.Protocol.Internal.Method.Method f_iGRPc 'Language.LSP.Protocol.Message.Meta.Request)) Data.Text.Internal.Text where
+  id f_aUJbG (TRequestMessage x1_aUJbH x2_aUJbI x3_aUJbJ x4_aUJbK)
+    = fmap
+        (\ y1_aUJbL -> TRequestMessage x1_aUJbH y1_aUJbL x3_aUJbJ x4_aUJbK)
+        (f_aUJbG x2_aUJbI)
+instance HasJsonrpc (TRequestMessage (m_iSZlY :: Language.LSP.Protocol.Internal.Method.Method f_iSZlX 'Language.LSP.Protocol.Message.Meta.Request)) Data.Text.Internal.Text where
   {-# INLINE jsonrpc #-}
   jsonrpc
-    f_aIEmQ
-    (TRequestMessage x1_aIEmR x2_aIEmS x3_aIEmT x4_aIEmU)
-    = (fmap
-         (\ y1_aIEmV
-            -> (((TRequestMessage y1_aIEmV) x2_aIEmS) x3_aIEmT) x4_aIEmU))
-        (f_aIEmQ x1_aIEmR)
-instance HasMethod (TRequestMessage (m_iGRPd :: Language.LSP.Protocol.Internal.Method.Method f_iGRPc 'Language.LSP.Protocol.Message.Meta.Request)) (Language.LSP.Protocol.Internal.Method.SMethod m_iGRPd) where
+    f_aUJbM
+    (TRequestMessage x1_aUJbN x2_aUJbO x3_aUJbP x4_aUJbQ)
+    = fmap
+        (\ y1_aUJbR -> TRequestMessage y1_aUJbR x2_aUJbO x3_aUJbP x4_aUJbQ)
+        (f_aUJbM x1_aUJbN)
+instance HasMethod (TRequestMessage (m_iSZlY :: Language.LSP.Protocol.Internal.Method.Method f_iSZlX 'Language.LSP.Protocol.Message.Meta.Request)) (Language.LSP.Protocol.Internal.Method.SMethod m_iSZlY) where
   {-# INLINE method #-}
   method
-    f_aIEn4
-    (TRequestMessage x1_aIEn5 x2_aIEn6 x3_aIEn7 x4_aIEn8)
-    = (fmap
-         (\ y1_aIEn9
-            -> (((TRequestMessage x1_aIEn5) x2_aIEn6) y1_aIEn9) x4_aIEn8))
-        (f_aIEn4 x3_aIEn7)
-instance (a_aIEna
-          ~ Language.LSP.Protocol.Internal.Method.MessageParams m_iGRPd) =>
-         HasParams (TRequestMessage (m_iGRPd :: Language.LSP.Protocol.Internal.Method.Method f_iGRPc 'Language.LSP.Protocol.Message.Meta.Request)) a_aIEna where
+    f_aUJc0
+    (TRequestMessage x1_aUJc1 x2_aUJc2 x3_aUJc3 x4_aUJc4)
+    = fmap
+        (\ y1_aUJc5 -> TRequestMessage x1_aUJc1 x2_aUJc2 y1_aUJc5 x4_aUJc4)
+        (f_aUJc0 x3_aUJc3)
+instance (a_aUJc6
+          ~ Language.LSP.Protocol.Internal.Method.MessageParams m_iSZlY) =>
+         HasParams (TRequestMessage (m_iSZlY :: Language.LSP.Protocol.Internal.Method.Method f_iSZlX 'Language.LSP.Protocol.Message.Meta.Request)) a_aUJc6 where
   {-# INLINE params #-}
   params
-    f_aIEnb
-    (TRequestMessage x1_aIEnc x2_aIEnd x3_aIEne x4_aIEnf)
-    = (fmap
-         (\ y1_aIEng
-            -> (((TRequestMessage x1_aIEnc) x2_aIEnd) x3_aIEne) y1_aIEng))
-        (f_aIEnb x4_aIEnf)
+    f_aUJc7
+    (TRequestMessage x1_aUJc8 x2_aUJc9 x3_aUJca x4_aUJcb)
+    = fmap
+        (\ y1_aUJcc -> TRequestMessage x1_aUJc8 x2_aUJc9 x3_aUJca y1_aUJcc)
+        (f_aUJc7 x4_aUJcb)
 
-instance HasId (TResponseMessage (m_iGRQI :: Language.LSP.Protocol.Internal.Method.Method f_iGRQH 'Language.LSP.Protocol.Message.Meta.Request)) (Maybe (Language.LSP.Protocol.Message.LspId.LspId m_iGRQI)) where
+instance HasId (TResponseMessage (m_iSZnz :: Language.LSP.Protocol.Internal.Method.Method f_iSZny 'Language.LSP.Protocol.Message.Meta.Request)) (Maybe (Language.LSP.Protocol.Message.LspId.LspId m_iSZnz)) where
   {-# INLINE id #-}
-  id f_aIEqZ (TResponseMessage x1_aIEr0 x2_aIEr1 x3_aIEr2)
-    = (fmap
-         (\ y1_aIEr3 -> ((TResponseMessage x1_aIEr0) y1_aIEr3) x3_aIEr2))
-        (f_aIEqZ x2_aIEr1)
-instance HasJsonrpc (TResponseMessage (m_iGRQI :: Language.LSP.Protocol.Internal.Method.Method f_iGRQH 'Language.LSP.Protocol.Message.Meta.Request)) Data.Text.Internal.Text where
+  id f_aUJgD (TResponseMessage x1_aUJgE x2_aUJgF x3_aUJgG)
+    = fmap
+        (\ y1_aUJgH -> TResponseMessage x1_aUJgE y1_aUJgH x3_aUJgG)
+        (f_aUJgD x2_aUJgF)
+instance HasJsonrpc (TResponseMessage (m_iSZnz :: Language.LSP.Protocol.Internal.Method.Method f_iSZny 'Language.LSP.Protocol.Message.Meta.Request)) Data.Text.Internal.Text where
   {-# INLINE jsonrpc #-}
-  jsonrpc f_aIEr4 (TResponseMessage x1_aIEr5 x2_aIEr6 x3_aIEr7)
-    = (fmap
-         (\ y1_aIEr8 -> ((TResponseMessage y1_aIEr8) x2_aIEr6) x3_aIEr7))
-        (f_aIEr4 x1_aIEr5)
-instance (a_aIErh
+  jsonrpc f_aUJgI (TResponseMessage x1_aUJgJ x2_aUJgK x3_aUJgL)
+    = fmap
+        (\ y1_aUJgM -> TResponseMessage y1_aUJgM x2_aUJgK x3_aUJgL)
+        (f_aUJgI x1_aUJgJ)
+instance (a_aUJgZ
           ~
-          Either ResponseError (Language.LSP.Protocol.Internal.Method.MessageResult m_iGRQI)) =>
-         HasResult (TResponseMessage (m_iGRQI :: Language.LSP.Protocol.Internal.Method.Method f_iGRQH 'Language.LSP.Protocol.Message.Meta.Request)) a_aIErh where
+          Either (TResponseError m_iSZnz) (Language.LSP.Protocol.Internal.Method.MessageResult m_iSZnz)) =>
+         HasResult (TResponseMessage (m_iSZnz :: Language.LSP.Protocol.Internal.Method.Method f_iSZny 'Language.LSP.Protocol.Message.Meta.Request)) a_aUJgZ where
   {-# INLINE result #-}
-  result f_aIEri (TResponseMessage x1_aIErj x2_aIErk x3_aIErl)
-    = (fmap
-         (\ y1_aIErm -> ((TResponseMessage x1_aIErj) x2_aIErk) y1_aIErm))
-        (f_aIEri x3_aIErl)
+  result f_aUJh0 (TResponseMessage x1_aUJh1 x2_aUJh2 x3_aUJh3)
+    = fmap
+        (\ y1_aUJh4 -> TResponseMessage x1_aUJh1 x2_aUJh2 y1_aUJh4)
+        (f_aUJh0 x3_aUJh3)
 
-instance HasJsonrpc (TNotificationMessage (m_iGRP6 :: Language.LSP.Protocol.Internal.Method.Method f_iGRP5 'Language.LSP.Protocol.Message.Meta.Notification)) Data.Text.Internal.Text where
+instance HasJsonrpc (TNotificationMessage (m_iSZlP :: Language.LSP.Protocol.Internal.Method.Method f_iSZlO 'Language.LSP.Protocol.Message.Meta.Notification)) Data.Text.Internal.Text where
   {-# INLINE jsonrpc #-}
-  jsonrpc f_aIEu3 (TNotificationMessage x1_aIEu4 x2_aIEu5 x3_aIEu6)
-    = (fmap
-         (\ y1_aIEu7
-            -> ((TNotificationMessage y1_aIEu7) x2_aIEu5) x3_aIEu6))
-        (f_aIEu3 x1_aIEu4)
-instance HasMethod (TNotificationMessage (m_iGRP6 :: Language.LSP.Protocol.Internal.Method.Method f_iGRP5 'Language.LSP.Protocol.Message.Meta.Notification)) (Language.LSP.Protocol.Internal.Method.SMethod m_iGRP6) where
+  jsonrpc f_aUJkj (TNotificationMessage x1_aUJkk x2_aUJkl x3_aUJkm)
+    = fmap
+        (\ y1_aUJkn -> TNotificationMessage y1_aUJkn x2_aUJkl x3_aUJkm)
+        (f_aUJkj x1_aUJkk)
+instance HasMethod (TNotificationMessage (m_iSZlP :: Language.LSP.Protocol.Internal.Method.Method f_iSZlO 'Language.LSP.Protocol.Message.Meta.Notification)) (Language.LSP.Protocol.Internal.Method.SMethod m_iSZlP) where
   {-# INLINE method #-}
-  method f_aIEug (TNotificationMessage x1_aIEuh x2_aIEui x3_aIEuj)
-    = (fmap
-         (\ y1_aIEuk
-            -> ((TNotificationMessage x1_aIEuh) y1_aIEuk) x3_aIEuj))
-        (f_aIEug x2_aIEui)
-instance (a_aIEul
-          ~ Language.LSP.Protocol.Internal.Method.MessageParams m_iGRP6) =>
-         HasParams (TNotificationMessage (m_iGRP6 :: Language.LSP.Protocol.Internal.Method.Method f_iGRP5 'Language.LSP.Protocol.Message.Meta.Notification)) a_aIEul where
+  method f_aUJkw (TNotificationMessage x1_aUJkx x2_aUJky x3_aUJkz)
+    = fmap
+        (\ y1_aUJkA -> TNotificationMessage x1_aUJkx y1_aUJkA x3_aUJkz)
+        (f_aUJkw x2_aUJky)
+instance (a_aUJkB
+          ~ Language.LSP.Protocol.Internal.Method.MessageParams m_iSZlP) =>
+         HasParams (TNotificationMessage (m_iSZlP :: Language.LSP.Protocol.Internal.Method.Method f_iSZlO 'Language.LSP.Protocol.Message.Meta.Notification)) a_aUJkB where
   {-# INLINE params #-}
-  params f_aIEum (TNotificationMessage x1_aIEun x2_aIEuo x3_aIEup)
-    = (fmap
-         (\ y1_aIEuq
-            -> ((TNotificationMessage x1_aIEun) x2_aIEuo) y1_aIEuq))
-        (f_aIEum x3_aIEup)
+  params f_aUJkC (TNotificationMessage x1_aUJkD x2_aUJkE x3_aUJkF)
+    = fmap
+        (\ y1_aUJkG -> TNotificationMessage x1_aUJkD x2_aUJkE y1_aUJkG)
+        (f_aUJkC x3_aUJkF)
 
-instance HasCode (TResponseError (m_iIEx9 :: Language.LSP.Protocol.Internal.Method.Method f_iIEx8 'Language.LSP.Protocol.Message.Meta.Request)) ((Language.LSP.Protocol.Types.Common.|?) Language.LSP.Protocol.Internal.Types.LSPErrorCodes.LSPErrorCodes Language.LSP.Protocol.Internal.Types.ErrorCodes.ErrorCodes) where
+instance HasCode (TResponseError (m_iSZoD :: Language.LSP.Protocol.Internal.Method.Method f_iSZoC 'Language.LSP.Protocol.Message.Meta.Request)) ((Language.LSP.Protocol.Types.Common.|?) Language.LSP.Protocol.Internal.Types.LSPErrorCodes.LSPErrorCodes Language.LSP.Protocol.Internal.Types.ErrorCodes.ErrorCodes) where
   {-# INLINE code #-}
-  code f_aIExm (TResponseError x1_aIExn x2_aIExo x3_aIExp)
-    = (fmap
-         (\ y1_aIExq -> ((TResponseError y1_aIExq) x2_aIExo) x3_aIExp))
-        (f_aIExm x1_aIExn)
-instance HasMessage (TResponseError (m_iIEx9 :: Language.LSP.Protocol.Internal.Method.Method f_iIEx8 'Language.LSP.Protocol.Message.Meta.Request)) Data.Text.Internal.Text where
+  code f_aUJo6 (TResponseError x1_aUJo7 x2_aUJo8 x3_aUJo9)
+    = fmap
+        (\ y1_aUJoa -> TResponseError y1_aUJoa x2_aUJo8 x3_aUJo9)
+        (f_aUJo6 x1_aUJo7)
+instance HasMessage (TResponseError (m_iSZoD :: Language.LSP.Protocol.Internal.Method.Method f_iSZoC 'Language.LSP.Protocol.Message.Meta.Request)) Data.Text.Internal.Text where
   {-# INLINE message #-}
-  message f_aIExr (TResponseError x1_aIExs x2_aIExt x3_aIExu)
-    = (fmap
-         (\ y1_aIExv -> ((TResponseError x1_aIExs) y1_aIExv) x3_aIExu))
-        (f_aIExr x2_aIExt)
-instance (a_aIExA
+  message f_aUJob (TResponseError x1_aUJoc x2_aUJod x3_aUJoe)
+    = fmap
+        (\ y1_aUJof -> TResponseError x1_aUJoc y1_aUJof x3_aUJoe)
+        (f_aUJob x2_aUJod)
+instance (a_aUJok
           ~
-          Maybe (Language.LSP.Protocol.Internal.Method.ErrorData m_iIEx9)) =>
-         HasXdata (TResponseError (m_iIEx9 :: Language.LSP.Protocol.Internal.Method.Method f_iIEx8 'Language.LSP.Protocol.Message.Meta.Request)) a_aIExA where
+          Maybe (Language.LSP.Protocol.Internal.Method.ErrorData m_iSZoD)) =>
+         HasXdata (TResponseError (m_iSZoD :: Language.LSP.Protocol.Internal.Method.Method f_iSZoC 'Language.LSP.Protocol.Message.Meta.Request)) a_aUJok where
   {-# INLINE xdata #-}
-  xdata f_aIExB (TResponseError x1_aIExC x2_aIExD x3_aIExE)
-    = (fmap
-         (\ y1_aIExF -> ((TResponseError x1_aIExC) x2_aIExD) y1_aIExF))
-        (f_aIExB x3_aIExE)
+  xdata f_aUJol (TResponseError x1_aUJom x2_aUJon x3_aUJoo)
+    = fmap
+        (\ y1_aUJop -> TResponseError x1_aUJom x2_aUJon y1_aUJop)
+        (f_aUJol x3_aUJoo)
 
